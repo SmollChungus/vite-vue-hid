@@ -6,6 +6,15 @@ import { WebRawHID } from "./components/webRawHID.ts";
 import { WebUsbComInterface } from "./components/webUsbComInterface.ts";
 
 let com: WebUsbComInterface;
+let updateTimerId: number;
+
+document.addEventListener('DOMContentLoaded', () => {
+    const app = createApp(App);
+    app.mount('#app');
+
+    setupPCBConnection();
+    generateRandomBlobbyGradient();
+});
 
 function setupPCBConnection() {
     const connectButton = document.getElementById("connect");
@@ -19,7 +28,9 @@ function setupPCBConnection() {
                 try {
                     com = new WebRawHID();
                     await com.open(() => {}, {});
+                    com.setReceiveCallback(dataReceiveHandler);
                     connectButton.innerText = "Disconnect";
+                    updateTimerId = setInterval(updateConsole, 50);
                 } catch (e) {
                     console.error(e);
                 }
@@ -41,9 +52,37 @@ function generateRandomBlobbyGradient() {
     document.body.style.backgroundImage = gradient;
 }
 
-document.addEventListener('DOMContentLoaded', () => {
-    generateRandomBlobbyGradient();
-    setupPCBConnection();
-    const app = createApp(App);
-    app.mount('#app');
-});
+function updateConsole() {
+    const hidConsole = document.getElementById("console");
+    if (hidConsole) {
+        let recvLine = "";
+        hidConsole.insertAdjacentText("beforeend", recvLine);
+        recvLine = "";
+
+        const autoScrollCheckbox = document.getElementById("autoscroll") as HTMLInputElement;
+        if (autoScrollCheckbox && autoScrollCheckbox.checked) {
+            hidConsole.scrollTop = hidConsole.scrollHeight;
+        }
+
+        if (hidConsole.innerHTML.length > 1000000) { // example console length
+            hidConsole.innerHTML = hidConsole.innerHTML.slice(-1000000);
+        }
+    }
+}
+
+function dataReceiveHandler(msg: Uint8Array) {
+    const text = new TextDecoder().decode(msg);
+    let recvLine = text;
+
+    // Assuming each message is separated by a newline
+    const lines = text.split('|').map(line => line.trim()).filter(line => line);
+    lines.forEach(line => {
+        const parts = line.match(/\((\d+),(\d+)\) Rescale: (\d+)/);
+        if (parts) {
+            const [, row, col, rescale] = parts.map(Number);
+            document.dispatchEvent(new CustomEvent('hid-data', {
+                detail: { row, col, rescale }
+            }));
+        }
+    });
+}
