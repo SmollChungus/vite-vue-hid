@@ -43,7 +43,7 @@ function setupPCBConnection() {
 
 function generateRandomBlobbyGradient() {
     const colors = ['#BF8F81', '#FFBEAC', '#6B949F', '#FFBEAC'];
-    const gradient = colors.map((color, index) => {
+    const gradient = colors.map((color) => {
         const size = 30 + Math.random() * 70; // random size from 30% to 100%
         const position = Math.round(Math.random() * 100);
         return `radial-gradient(circle at ${position}% ${position}%, ${color} ${size}%, transparent 70%)`;
@@ -72,9 +72,6 @@ function updateConsole() {
 
 function dataReceiveHandler(msg: Uint8Array) {
     const text = new TextDecoder().decode(msg);
-    let recvLine = text;
-
-    // Assuming each message is separated by a newline
     const lines = text.split('|').map(line => line.trim()).filter(line => line);
     lines.forEach(line => {
         const parts = line.match(/\((\d+),(\d+)\) Rescale: (\d+)/);
