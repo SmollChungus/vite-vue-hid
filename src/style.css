@@ -28,8 +28,6 @@ body {
   place-items: center;
   min-width: 320px;
   min-height: 100vh;
-  /* Remove or comment out the background-color to test if it's causing issues */
-  /* background-color: #c12626; */
 }
 
 
