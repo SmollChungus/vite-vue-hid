@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="ja">`
+  <link rel="stylesheet" href="./src/style.css">
+  <head>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=G-3DCZJ3B0VH"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+
+      gtag("config", "G-3DCZJ3B0VH");
+    </script>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Web HID Listen</title>
+  </head>
+
+  <body>
+    <main>
+      <h1>Hall Effect HID GUI</h1>
+
+      <div id="control">
+        <button id="connect">Connect PCB</button>
+        <button id="clear">Clear Terminal</button>
+        <button id="save">Save Text</button>
+        <input type="checkbox" id="autoscroll" checked />
+        <label for="autoscroll">Auto Scroll</label>
+        <a id="download-file" href="#" download="plot.csv"></a>
+      </div>
+      <div>
+        <textarea readonly cols="40" rows="1" id="console"></textarea>
+      </div>
+      <div>
+        Please note that the rescaled value is rescaled from raw adc reads, and is not "debounced"
+      </div>
+      <script type="module" src="src/components/index.ts" charset="utf-8"></script>
+      <div id="vue-keyboard-app">
+      </div>
+    </main>
+  </body>
+</html>
