@@ -6,7 +6,6 @@ interface WebUsbComInterface {
   open(onConnect: () => void | null, param: object): Promise<void>;
   close(): Promise<void>;
   writeString(msg: string): Promise<void>;
-  write(msg: Uint8Array): Promise<void>;
 }
 
 export type { WebUsbComInterface };

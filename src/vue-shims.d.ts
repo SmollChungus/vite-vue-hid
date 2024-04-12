@@ -6,3 +6,8 @@ declare module "*.vue" {
     export default component;
   }
   
+  declare global {
+    interface Navigator {
+      hid?: HID; // Use the correct type for HID if available, or use any if type details are unknown
+    }
+  }
