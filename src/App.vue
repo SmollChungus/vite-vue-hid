@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <h1>Custom Keyboard and Color Picker</h1>
+    <h1>65HE</h1>
     <MyColorPicker @color-update="handleColorUpdate"/>
     <Keyboard :colors="keyboardColors" />
   </div>
