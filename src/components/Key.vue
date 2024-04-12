@@ -10,7 +10,7 @@ const props = defineProps({
   label: String,
   isActive: Boolean,
   isWide: Boolean,
-  clampedRescale: Number // Use the clampedRescale prop here
+  clampedRescale: Number 
 });
 
 
@@ -31,22 +31,21 @@ function updateKeyState(state) {
     padding: 10px 20px;
     margin: 5px;
     cursor: pointer;
-    user-select: none; /* Prevent text selection */
+    user-select: none; 
     transition: background-color 0.2s, transform 0.2s;
-    white-space: nowrap; /* Ensure text doesn't wrap */
-    text-align: center; /* Center text */
+    white-space: nowrap; 
+    text-align: center; 
   }
   
-  /* Adjust the styles for wide keys */
   .key-wide {
-    width: auto; /* Adjust width automatically based on the content and padding */
-    padding: 10px 40px; /* Example padding for wide keys */
+    width: auto; 
+    padding: 10px 40px; 
   }
   
   .key.is-active {
-    background-color: #dc4707; /* Key color when active/pressed */
+    background-color: #dc4707;
     color: #710b0b;
-    transform: scale(0.95); /* Slight press effect */
+    transform: scale(0.95);
   }
   
   .key-fill {
@@ -54,9 +53,8 @@ function updateKeyState(state) {
     bottom: 0;
     left: 0;
     right: 0;
-    background-color: #60a3eb; /* Highlight color */
+    background-color: #60a3eb;
     transition: height 0.2s;
 }
-  /* You can add further styles for different states or themes */
   </style>
   

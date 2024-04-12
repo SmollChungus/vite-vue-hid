@@ -1,17 +1,16 @@
 <template>
   <div class="color-picker-container">
-    <!-- This should now work if imported correctly -->
     <ColorPicker v-model="colors[index]" @update:color="updateColor(index, $event)" v-for="(color, index) in colors" :key="index" />
   </div>
 </template>
 
 <script>
-import { ColorPicker } from 'vue3-colorpicker'; // Ensure correct import
+import { ColorPicker } from 'vue3-colorpicker'; 
 import 'vue3-colorpicker/style.css';
 
 export default {
   components: {
-    ColorPicker // Ensure the component is registered correctly
+    ColorPicker 
   },
   data() {
     return {

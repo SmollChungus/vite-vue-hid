@@ -2,9 +2,8 @@
 import { WebRawHID } from "./webRawHID";
 import { WebUsbComInterface } from "./webUsbComInterface";
 import { createApp } from 'vue';
-import App from '../App.vue'; // Adjust the path as necessary
+import App from '../App.vue'; 
 
-// Ensure this runs when the DOM is ready
 document.addEventListener('DOMContentLoaded', () => {
   createApp(App).mount('#vue-keyboard-app');
 });
@@ -15,18 +14,13 @@ let com: WebUsbComInterface;
 const consoleLength = 1000000;
 
 
-/*if (!(navigator as any).serial) {
-  alert("Please use chrome or edge");
-}*/
 
 let connectButton = document.getElementById("connect");
 
-let updateTimerId: number; // Use number for browser environment
+let updateTimerId: number; 
 
-// When setting the interval:
 updateTimerId = window.setInterval(updateConsole, 50);
 
-// When clearing the interval:
 window.clearInterval(updateTimerId);
 
 if (connectButton) {
@@ -38,7 +32,7 @@ if (connectButton) {
     } else {
       try {
         com = new WebRawHID();
-        await com.open(() => {}, {}); // Pass an empty function as the first argument
+        await com.open(() => {}, {}); 
         com.setReceiveCallback(dataReceiveHandler);
         connectButton.innerText = "Disconnect";
         updateTimerId = setInterval(updateConsole, 50);
@@ -55,7 +49,6 @@ const hidConsole = document.getElementById("console");
 
 let recvLine = "";
 
-// Clear button logic with null check
 const clearButton = document.getElementById("clear");
 if (clearButton) {
   clearButton.onclick = () => {
@@ -107,12 +100,10 @@ function updateConsole() {
   }
 }
 
-// This function might exist in index.ts or wherever you handle the HID data
 function dataReceiveHandler(msg: Uint8Array) {
   const text = new TextDecoder().decode(msg);
   recvLine += text;
 
-  // Assuming each message is separated by a newline
   const lines = text.split('|').map(line => line.trim()).filter(line => line);
 
   lines.forEach(line => {
@@ -121,7 +112,6 @@ function dataReceiveHandler(msg: Uint8Array) {
     if (parts) {
       const [, row, col, rescale] = parts;
       console.log(parts)
-      // Emit an event with parsed data (this part needs adaptation to fit your app architecture)
       document.dispatchEvent(new CustomEvent('hid-data', {
         detail: { row: parseInt(row), col: parseInt(col), rescale: parseInt(rescale) }
       }));

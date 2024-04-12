@@ -67,12 +67,12 @@ button:focus-visible {
 #control {
   display: flex;
   justify-content: center;
-  width: 100%; /* Make sure it spans the full width of its parent */
+  width: 100%; 
 }
 
 .description {
   text-align: center;
-  margin-top: 20px; /* Or any amount to push it down a bit */
+  margin-top: 20px; 
 }
 
 

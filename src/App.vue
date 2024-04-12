@@ -9,7 +9,7 @@
 <script setup>
 import { ref } from 'vue';
 import Keyboard from './components/Keyboard.vue';
-import MyColorPicker from './components/MyColorPicker.vue'; // Correct import
+import MyColorPicker from './components/MyColorPicker.vue'; 
 
 const keyboardColors = ref([]);
 

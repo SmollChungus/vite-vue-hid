@@ -20,9 +20,6 @@ class WebRawHID implements WebUsbComInterface {
     this.port?.addEventListener("inputreport", this.receiveCallback);
   }
 
-  setErrorCallback() {
-    // Use this method to handle errors, make sure you call this method if errors occur
-  }
 
   setCloseCallback(handler: () => void) {
     this.closeCallback = handler;
