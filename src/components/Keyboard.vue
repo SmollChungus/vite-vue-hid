@@ -5,7 +5,7 @@
           :key="key.label"
           :label="key.label" 
           :isActive="key.isActive"
-          :isWide="key.w > 1"
+          :isWide="key.w ?? 0 > 1"
           :clampedRescale="key.clampedRescale" 
           @update-key-state="handleKeyStateChange"
           :style="getKeyStyle(key)" />
